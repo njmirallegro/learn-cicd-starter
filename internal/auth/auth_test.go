@@ -15,7 +15,7 @@ func TestGetAPIKey_ValidHeader(t *testing.T) {
 		t.Errorf("Unexpected error: %v", err)
 	}
 
-	expected := "my-secret-key"
+	expected := "my-secret-keys"
 	if apiKey != expected {
 		t.Errorf("Expected %s, got %s", expected, apiKey)
 	}
@@ -46,7 +46,7 @@ func TestGetAPIKey_MalformedHeader_NoPrefix(t *testing.T) {
 // Test malformed Authorization header (only "ApiKey" without key)
 func TestGetAPIKey_MalformedHeader_NoKey(t *testing.T) {
 	headers := http.Header{}
-	headers.Set("Authorization", "ApidKey") // No key provided
+	headers.Set("Authorization", "ApiKey") // No key provided
 
 	_, err := GetAPIKey(headers)
 	expectedErr := "malformed authorization header"
